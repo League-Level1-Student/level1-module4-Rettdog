@@ -25,7 +25,7 @@ import javazoom.jl.player.advanced.AdvancedPlayer;
 
 public class Jukebox implements Runnable, ActionListener {
 	JButton button1, button2, button3;
-
+	Song prince, wii, violin;
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(new Jukebox());
 		Jukebox box = new Jukebox();
@@ -36,9 +36,7 @@ public class Jukebox implements Runnable, ActionListener {
 
 		// 3. Find an mp3 on your computer or on the Internet.
 		// 4. Create a Song
-		Song batman = new Song("batman.mp3");
-		// 5. Play the Song
-		batman.play();
+		
 		/*
 		 * 6. Create a user interface for your Jukebox so that the user can to choose
 		 * which song to play. You can use can use a different button for each song, or
@@ -47,11 +45,11 @@ public class Jukebox implements Runnable, ActionListener {
 		 */
 		JFrame frame = new JFrame();
 		JPanel panel = new JPanel();
-		button1 = new JButton();
+		button1 = new JButton("The Prince of Bel Air");
 		button1.addActionListener(this);
-		button2 = new JButton();
+		button2 = new JButton("Wii Music");
 		button2.addActionListener(this);
-		button3 = new JButton();
+		button3 = new JButton("Violin Music");
 		button3.addActionListener(this);
 		panel.add(button1);
 		panel.add(button2);
@@ -59,7 +57,10 @@ public class Jukebox implements Runnable, ActionListener {
 		frame.add(panel);
 		frame.setVisible(true);
 		frame.pack();
-
+		prince = new Song("PrinceofBelAir.mp3");
+		wii = new Song("wii.mp3");
+		violin = new Song("Violins.mp3");
+		
 	}
 
 	/* Use this method to add album covers to your Panel. */
@@ -72,7 +73,28 @@ public class Jukebox implements Runnable, ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
+		if(e.getSource().equals(button1)) {
+			
+			// 5. Play the Song
+			prince.stop();
+			violin.stop();
+			wii.stop();
+			prince.play();
+		}else if(e.getSource().equals(button2)) {
+			
+			// 5. Play the Song
+			prince.stop();
+			violin.stop();
+			wii.stop();
+			wii.play();
+		}else {
 		
+			// 5. Play the Song
+			prince.stop();
+			wii.stop();
+			violin.stop();
+			violin.play();
+		}
 	}
 
 }
@@ -111,8 +133,9 @@ class Song {
 	}
 
 	public void stop() {
-		if (mp3Player != null)
+		if (mp3Player != null) {
 			mp3Player.close();
+		}
 	}
 
 	private void startSong() {
